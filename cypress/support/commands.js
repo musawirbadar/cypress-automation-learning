@@ -25,4 +25,13 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-file-upload';
 import 'cypress-iframe';
-
+// Add product to cart custom command
+Cypress.Commands.add("addProductToCart", (productName) => {
+  cy.visit("https://example-ecommerce.com")  // site link
+  cy.get("input[placeholder='Search']").type(productName)
+  cy.contains("button", "Search").click()
+  cy.contains(".product-title", productName).click()
+  cy.contains("button", "Add to Cart").click()
+})
+//In the first line we use productName, its declaring the functiona parameter
+//Without declaring in function parameter we can't use productName variable below
